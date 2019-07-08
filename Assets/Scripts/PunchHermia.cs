@@ -30,6 +30,7 @@ public class PunchHermia : MonoBehaviour
     private AudioClip[] punchPhraseClips;
 
     private int counter = 0;
+    private int punchSoundCounter = 0;
 
     private bool isChoosingTime = false;
 
@@ -51,12 +52,12 @@ public class PunchHermia : MonoBehaviour
                 {
                     if (col.gameObject.tag == "Hermia")
                     {
-                        punchHolder.sprite = punchSprites[counter];
+                        punchHolder.sprite = punchSprites[counter++];
                         SoundManager.Instance.Play(punchClip);
-                        int rand = Random.Range(0, punchPhraseClips.Length);
+                        //int rand = Random.Range(0, punchPhraseClips.Length);
                         SoundManager.Instance.StopLoopBGMusic();
-                        SoundManager.Instance.PlayMusic(punchPhraseClips[rand]);
-                        counter++;
+                        SoundManager.Instance.PlayMusic(punchPhraseClips[punchSoundCounter++]);
+                        //counter++;
                     }
                 }          
             }
@@ -98,7 +99,7 @@ public class PunchHermia : MonoBehaviour
     {
         yield return new WaitForSeconds(.5f);
 
-        punchHolder.gameObject.SetActive(false);
+        //punchHolder.gameObject.SetActive(false);
         choose.SetActive(true);
 
         isChoosingTime = true;

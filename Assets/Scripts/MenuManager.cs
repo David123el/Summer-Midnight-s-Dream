@@ -52,6 +52,7 @@ public class MenuManager : MonoBehaviour
     private AudioClip[] scenesClips;
 
     private static bool isBegin = true;
+    private static bool hasTextHappened = false;
 
     private RaycastController rc;
 
@@ -74,7 +75,11 @@ public class MenuManager : MonoBehaviour
         SoundManager.Instance.LoopBGMusic();
 
         scenesAnims[GameManager.currentLevel - 1].SetActive(true);
-        SoundManager.Instance.Play(scenesClips[GameManager.currentLevel - 1]);
+        if (!hasTextHappened)
+        {
+            SoundManager.Instance.Play(scenesClips[GameManager.currentLevel - 1]);
+            hasTextHappened = true;
+        }
 
         rc = GetComponent<RaycastController>();
 

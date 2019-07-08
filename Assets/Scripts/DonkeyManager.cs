@@ -41,6 +41,8 @@ public class DonkeyManager : MonoBehaviour
     [SerializeField]
     private GameObject openAnim;
 
+    private static bool hasBeginAnimHappened = false;
+
     [SerializeField]
     private AudioClip[] randomClips;
 
@@ -74,7 +76,12 @@ public class DonkeyManager : MonoBehaviour
     {
         EventManager.LevelStart();
 
-        var opening = Instantiate(openAnim);
+        if (!hasBeginAnimHappened)
+        {
+            timeLeft = 63;
+            var opening = Instantiate(openAnim);
+            hasBeginAnimHappened = true;
+        }
 
         for (int i = 0; i < blockPool.Count; i++)
         {
