@@ -55,7 +55,7 @@ public class SceneController : MonoBehaviour
     public void LoadLevel()
     {
         if (levelToLoad != string.Empty)
-            SceneManager.LoadScene(levelToLoad);
+            LoadLevel(levelToLoad);
     }
 
     public void LoadLevelAsync(string name)
