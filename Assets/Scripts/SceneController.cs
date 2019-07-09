@@ -40,6 +40,12 @@ public class SceneController : MonoBehaviour
         if (n == "Level_11_Scene") {
             LoadExternalLevel("com.bbs.wedding11");
             return;
+        } else if (n == "Level_06_Scene") {
+            LoadExternalLevel("com.bbs.patterns06");
+            return;
+        } else if (n == "Level_02_Scene") {
+            LoadExternalLevel("com.bbs.pong");
+            return;
         }
         //SoundManager.Instance.StopMusic();
         SceneManager.LoadScene(n);
