@@ -46,10 +46,16 @@ public class DonkeyManager : MonoBehaviour
     [SerializeField]
     private AudioClip[] randomClips;
 
+    [SerializeField]
+    private GameObject greyScreen;
+    [SerializeField]
+    private GameObject guideText;
+
+    [SerializeField]
+    private EventManager eventManager;
+
     private void OnEnable()
     {
-        //Application.targetFrameRate = 60;
-
         EventManager.OnBlockLand += MoveCameraUp;
         EventManager.OnBlockLand += RandomDirection;
         EventManager.OnBlockLand += NextBlock;
@@ -74,6 +80,9 @@ public class DonkeyManager : MonoBehaviour
 
     private void Start()
     {
+        GameManager.instance.Guide(greyScreen, guideText);
+        eventManager.OnLevelBegin(greyScreen, guideText);
+
         EventManager.LevelStart();
 
         if (!hasBeginAnimHappened)
@@ -98,9 +107,6 @@ public class DonkeyManager : MonoBehaviour
                 blockPool[i].transform.position = new Vector3(blockPool[i].transform.position.x, blockPool[i].transform.position.y + blockPool[i - 1].transform.position.y + blockStep, blockPool[i].transform.position.z);
             }
         }
-
-        //rb = block.GetComponent<Rigidbody2D>();
-        //rb.gravityScale = 0;
 
         direction = Vector3.right;
 
@@ -243,5 +249,10 @@ public class DonkeyManager : MonoBehaviour
             yield return new WaitForSeconds(1);
             timeLeft--;
         }
+    }
+
+    public void PauseGame()
+    {
+        GameManager.instance.PauseGame();
     }
 }

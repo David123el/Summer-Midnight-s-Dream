@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
@@ -59,6 +60,23 @@ public class MenuManager : MonoBehaviour
     private bool isMenuOn = false;
     public static bool isSoundMuted = false;
 
+    [SerializeField]
+    private Text playerText;
+    [SerializeField]
+    private Text againstText;
+    [SerializeField]
+    private Text challengeText;
+    [SerializeField]
+    private Text actText;
+
+    public string playerNameText;
+    public string againstNameText;
+    public string challengeTypeText;
+    public string actNumberText;
+    public string levelToLoad;
+
+    private SceneController sceneController;
+
     IEnumerator Start()
     {
         if (isBegin)
@@ -94,6 +112,8 @@ public class MenuManager : MonoBehaviour
             SoundManager.Instance.UnMute();
             isSoundMuted = false;
         }
+
+        sceneController = GetComponent<SceneController>();
     }
 
     void Update()
@@ -219,5 +239,30 @@ public class MenuManager : MonoBehaviour
     {
         SoundManager.Instance.StopLoopSFXMusic();
         SoundManager.Instance.Play(buttonClickClip);
+    }
+
+    public void UpdatePlayerText(string playerNameText)
+    {
+        playerText.text = playerNameText;
+    }
+
+    public void UpdateAgainstText(string againstNameText)
+    {
+        againstText.text = againstNameText;
+    }
+
+    public void UpdateChallengeText(string challengeNameText)
+    {
+        challengeText.text = challengeNameText;
+    }
+
+    public void UpdateActText(string actNumberText)
+    {
+        actText.text = actNumberText;
+    }
+
+    public void UpdateButtonLevel(string levelToLoad)
+    {
+        sceneController.levelToLoad = levelToLoad;
     }
 }

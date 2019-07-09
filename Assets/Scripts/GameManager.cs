@@ -1,9 +1,9 @@
-﻿using System;
+﻿using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance;
+    public static GameManager instance = null;
     private bool isTimeStopped = false;
 
     public static int currentLevel = 1;
@@ -11,11 +11,15 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnLevelStart += StopMusic;
+        EventManager.LevelBegin += Guide;
+        EventManager.OnPauseGame += PauseGame;
     }
 
     private void OnDisable()
     {
         EventManager.OnLevelStart -= StopMusic;
+        EventManager.LevelBegin -= Guide;
+        EventManager.OnPauseGame -= PauseGame;
     }
 
     private void StopMusic()
@@ -42,17 +46,31 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 60;
     }
 
-    private void Update()
-    {
-
-    }
-
     public void PauseGame()
     {
         if (!isTimeStopped)
         {
             Time.timeScale = 0;
             isTimeStopped = true;
+        }
+        else
+        {
+            Time.timeScale = 1;
+            isTimeStopped = false;
+        }
+    }
+
+    public void PauseGame(GameObject[] objectsToFreeze)
+    {
+        if (!isTimeStopped)
+        {
+            Time.timeScale = 0;
+            isTimeStopped = true;
+
+            for (int i = 0; i < objectsToFreeze.Length; i++)
+            {
+                //objectsToFreeze[i].
+            }
         }
     }
 
@@ -79,11 +97,22 @@ public class GameManager : MonoBehaviour
             Application.OpenURL("https://google.com");
         }
         else //open the app
+        {
             ca.Call("startActivity", launchIntent);
+        }
 
         up.Dispose();
         ca.Dispose();
         packageManager.Dispose();
         launchIntent.Dispose();
+    }
+
+    public IEnumerator Guide(GameObject greyScreen, GameObject guideText)
+    {
+        greyScreen.SetActive(true);
+        guideText.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        greyScreen.SetActive(false);
+        guideText.SetActive(false);
     }
 }

@@ -19,6 +19,14 @@ public class OberonTitania : MonoBehaviour
     private Vector3 teddyPos;
     private Vector3 babyPos;
 
+    [SerializeField]
+    private GameObject greyScreen;
+    [SerializeField]
+    private GameObject guideText;
+
+    [SerializeField]
+    private EventManager eventManager;
+
     private void OnEnable()
     {
         EventManager.OnSwitchBabyTeddy += SwitchPositions;
@@ -35,6 +43,9 @@ public class OberonTitania : MonoBehaviour
     {
         teddyPos = teddy.transform.position;
         babyPos = baby.transform.position;
+
+        GameManager.instance.Guide(greyScreen, guideText);
+        eventManager.OnLevelBegin(greyScreen, guideText);
     }
 
     void Update()
