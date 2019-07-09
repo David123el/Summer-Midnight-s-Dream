@@ -11,8 +11,36 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    private void LoadExternalLevel(string name)
+    {
+        string bundleId = name; // your target bundle id
+        AndroidJavaClass up = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+        AndroidJavaObject ca = up.GetStatic<AndroidJavaObject>("currentActivity");
+        AndroidJavaObject packageManager = ca.Call<AndroidJavaObject>("getPackageManager");
+    
+        AndroidJavaObject launchIntent = null;
+        try
+        {
+            launchIntent = packageManager.Call<AndroidJavaObject>("getLaunchIntentForPackage",bundleId);
+            //launchIntent.Call("setFlags", /* 0x00010000 |*/ 0x10000000);
+            ca.Call("startActivity",launchIntent);
+        }
+        finally
+        {
+            up.Dispose();
+            ca.Dispose();
+            packageManager.Dispose();
+            launchIntent.Dispose();
+        }
+
+    }
+
     public void LoadLevel(string n)
     {
+        if (n == "Level_11_Scene") {
+            LoadExternalLevel("com.bbs.wedding11");
+            return;
+        }
         //SoundManager.Instance.StopMusic();
         SceneManager.LoadScene(n);
     }
