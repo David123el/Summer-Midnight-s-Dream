@@ -50,10 +50,21 @@ public class BaaliHamelachaController : MonoBehaviour
     private Sprite arrowSprite;
     private GameObject directorSit;
     private GameObject directorCheer;
+
+    [SerializeField]
+    private GameObject greyScreen;
+    [SerializeField]
+    private GameObject guideText;
+
+    [SerializeField]
+    private EventManager eventManager;
     #endregion
 
     void Start()
     {
+        GameManager.instance.Guide(greyScreen, guideText);
+        eventManager.OnLevelBegin(greyScreen, guideText);
+
         for (int i = 0; i < arrowsList.Count; i++)
         {
             int rand = Random.Range(0, arrows.Length);

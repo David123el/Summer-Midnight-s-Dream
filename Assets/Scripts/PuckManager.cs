@@ -16,7 +16,21 @@ public class PuckManager : MonoBehaviour
 
     [SerializeField]
     private AudioClip ropeSound;
+    [SerializeField]
+    private AudioClip vivaldiSound;
+    [SerializeField]
+    private AudioClip pullFlowerSound;
+    [SerializeField]
+    private AudioClip errorSound;
 
+    [SerializeField]
+    private GameObject greyScreen;
+    [SerializeField]
+    private GameObject guideText;
+
+    [SerializeField]
+    private EventManager eventManager;
+    
     private void OnDisable()
     {
         SoundManager.Instance.StopLoopSFXMusic();
@@ -25,9 +39,14 @@ public class PuckManager : MonoBehaviour
 
     void Start()
     {
+        GameManager.instance.Guide(greyScreen, guideText);
+        eventManager.OnLevelBegin(greyScreen, guideText);
+
         EventManager.LevelStart();
         SoundManager.Instance.Play(ropeSound);
         SoundManager.Instance.LoopSFXMusic();
+        SoundManager.Instance.PlayMusic(vivaldiSound);
+        SoundManager.Instance.LoopBGMusic();
     }
 
     void Update()
@@ -41,6 +60,11 @@ public class PuckManager : MonoBehaviour
                     StartCoroutine(SwitchBool());
                 }
             }
+            else
+            {
+                SoundManager.Instance.StopLoopSFXMusic();
+                SoundManager.Instance.Play(errorSound);
+            }
         }
     }
 
@@ -48,7 +72,9 @@ public class PuckManager : MonoBehaviour
     {
         SoundManager.Instance.StopLoopSFXMusic();
         SoundManager.Instance.StopMusic();
+        
         puckAnim.SetBool("isTakingFlower", true);
+        SoundManager.Instance.Play(pullFlowerSound);
         yield return new WaitForSeconds(1.12f);
         puckAnim.SetBool("isTakingFlower", false);
 

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     public new string name;
+    public string levelToLoad;
 
     public void RestartScene()
     {
@@ -13,8 +14,13 @@ public class SceneController : MonoBehaviour
 
     public void LoadLevel(string n)
     {
-        //SoundManager.Instance.StopMusic();
         SceneManager.LoadScene(n);
+    }
+
+    public void LoadLevel()
+    {
+        if (levelToLoad != string.Empty)
+            SceneManager.LoadScene(levelToLoad);
     }
 
     public void LoadLevelAsync(string name)

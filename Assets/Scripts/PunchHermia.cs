@@ -34,8 +34,19 @@ public class PunchHermia : MonoBehaviour
 
     private bool isChoosingTime = false;
 
+    [SerializeField]
+    private GameObject greyScreen;
+    [SerializeField]
+    private GameObject guideText;
+
+    [SerializeField]
+    private EventManager eventManager;
+
     void Start()
     {
+        GameManager.instance.Guide(greyScreen, guideText);
+        eventManager.OnLevelBegin(greyScreen, guideText);
+
         //raycastController = new RaycastController();
         EventManager.LevelStart();
     }

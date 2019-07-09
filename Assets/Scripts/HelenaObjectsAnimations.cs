@@ -16,6 +16,27 @@ public class HelenaObjectsAnimations : MonoBehaviour
     [SerializeField]
     private GameObject swordTalkGO;
 
+    [SerializeField]
+    private GameObject greyScreen;
+    [SerializeField]
+    private GameObject guideText;
+
+    [SerializeField]
+    private EventManager eventManager;
+
+    private void Awake()
+    {
+        Resources.UnloadUnusedAssets();
+    }
+
+    private void Start()
+    {
+        EventManager.LevelStart();
+
+        GameManager.instance.Guide(greyScreen, guideText);
+        eventManager.OnLevelBegin(greyScreen, guideText);
+    }
+
     public IEnumerator ActivateGO(string name)
     {
         if (!HelenaObjectsController.isAnimOn)
