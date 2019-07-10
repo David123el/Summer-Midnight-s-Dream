@@ -1,18 +1,22 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
     private bool isTimeStopped = false;
 
-    public static int currentLevel = 1;
+    public int currentLevel = 5;
 
     private void OnEnable()
     {
         EventManager.OnLevelStart += StopMusic;
         EventManager.LevelBegin += Guide;
         EventManager.OnPauseGame += PauseGame;
+        EventManager.OnExitLevel += ExitToMainMenu;
+        EventManager.OnLevelComplete += NextLevel;
     }
 
     private void OnDisable()
@@ -20,6 +24,8 @@ public class GameManager : MonoBehaviour
         EventManager.OnLevelStart -= StopMusic;
         EventManager.LevelBegin -= Guide;
         EventManager.OnPauseGame -= PauseGame;
+        EventManager.OnExitLevel -= ExitToMainMenu;
+        EventManager.OnLevelComplete -= NextLevel;
     }
 
     private void StopMusic()
@@ -39,6 +45,9 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
+
+        Resources.UnloadUnusedAssets();
+        //GC.Collect();
     }
 
     private void Start()
@@ -114,5 +123,15 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
         greyScreen.SetActive(false);
         guideText.SetActive(false);
+    }
+
+    public void ExitToMainMenu()
+    {
+        SceneManager.LoadScene("Main_Stage_Scene");
+    }
+
+    public void NextLevel()
+    {
+        currentLevel++;
     }
 }

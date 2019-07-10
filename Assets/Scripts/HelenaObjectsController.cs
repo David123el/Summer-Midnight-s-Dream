@@ -20,6 +20,7 @@ public class HelenaObjectsController : MonoBehaviour
     private void Start()
     {
         //image = GetComponent<Image>();
+        //Resources.UnloadUnusedAssets();
     }
 
     public void ChangeObject()

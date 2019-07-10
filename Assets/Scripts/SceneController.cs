@@ -44,12 +44,13 @@ public class SceneController : MonoBehaviour
         } else if (n == "Level_06_Scene") {
             LoadExternalLevel("com.bbs.patterns06");
             return;
-        } else if (n == "Level_02_Scene") {
+        } else if (n == "Level_07_Scene") {
             LoadExternalLevel("com.bbs.pong");
             return;
         }
-        //SoundManager.Instance.StopMusic();
         SceneManager.LoadScene(n);
+
+        //SoundManager.Instance.StopMusic();
     }
 
     public void LoadLevel()
@@ -61,6 +62,12 @@ public class SceneController : MonoBehaviour
     public void LoadLevelAsync(string name)
     {
         StartCoroutine(LoadYourAsyncScene(name));
+    }
+
+    public void LoadLevelAsync()
+    {
+        if (levelToLoad != string.Empty)
+            StartCoroutine(LoadYourAsyncScene(levelToLoad));
     }
 
     public IEnumerator LoadYourAsyncScene(string name)

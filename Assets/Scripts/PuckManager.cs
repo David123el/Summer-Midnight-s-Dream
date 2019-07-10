@@ -30,7 +30,10 @@ public class PuckManager : MonoBehaviour
 
     [SerializeField]
     private EventManager eventManager;
-    
+
+    [SerializeField]
+    private GameObject[] reviews;
+
     private void OnDisable()
     {
         SoundManager.Instance.StopLoopSFXMusic();
@@ -85,5 +88,16 @@ public class PuckManager : MonoBehaviour
 
         blueFlower.SetActive(true);
         blueFlower.GetComponent<Animator>().SetBool("isGrew", true);
+
+        yield return new WaitForSeconds(blueFlower.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0).Length);
+
+        int rand = Random.Range(0, reviews.Length);
+        reviews[rand].SetActive(true);
+
+        yield return new WaitForSeconds(5f);
+        EventManager.LevelComplete();
+        EventManager.ExitLevel();
+
+        GameManager.instance.currentLevel += 3;
     }
 }

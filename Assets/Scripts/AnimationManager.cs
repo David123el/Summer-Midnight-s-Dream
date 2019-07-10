@@ -22,10 +22,14 @@ public class AnimationManager : MonoBehaviour
     [SerializeField]
     private GameObject[] clickableGO;
 
+    [SerializeField]
+    private AudioClip[] audioClips;
+
     public static bool isGameOn = true;
 
     private void Start()
     {
+        isGameOn = true;
         EventManager.LevelStart();
 
         for (int i = 0; i < go.Length; i++)
@@ -48,6 +52,7 @@ public class AnimationManager : MonoBehaviour
             if (rand == number)
             {
                 SetAnimatorBool("isPlay", animators);
+                SoundManager.Instance.Play(audioClips[0]);
             }
 
             if (Input.GetButtonDown("Fire1"))
@@ -59,6 +64,8 @@ public class AnimationManager : MonoBehaviour
                     if (col.gameObject.tag == "Oberon")
                     {
                         SetAnimatorBool("isClicked", clickableAnimators);
+                        SoundManager.Instance.Play(audioClips[0]);
+                        //EventManager.LevelComplete();
                     }
                 }
             }

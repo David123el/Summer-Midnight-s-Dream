@@ -25,6 +25,8 @@ public class MenuManager : MonoBehaviour
     [SerializeField]
     private GameObject aboutButton;
     [SerializeField]
+    private GameObject fullPlayButton;
+    [SerializeField]
     private AudioClip aboutClip;
     [SerializeField]
     private AudioClip buttonClickClip;
@@ -77,8 +79,97 @@ public class MenuManager : MonoBehaviour
 
     private SceneController sceneController;
 
+    [SerializeField]
+    private GameObject[] levelSelections;
+    [SerializeField]
+    private Sprite newGameSprite;
+    [SerializeField]
+    private Sprite noneActiveGameSprite;
+    [SerializeField]
+    private Sprite[] facesSprites;
+    [SerializeField]
+    private Sprite[] selectedFacesSprites;
+
+    public string buttonName;
+
+    [SerializeField]
+    private GameObject scene02Anim;
+    private GameObject scene02GO;
+
+    private void OnApplicationQuit()
+    {
+        Destroy(scene02GO);
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(scene02GO);
+    }
+
     IEnumerator Start()
     {
+        EventManager.LevelStart();
+
+        scene02GO = Instantiate(scene02Anim);
+
+        for (int i = 0; i < levelSelections.Length; i++)
+        {
+            if (levelSelections[i].activeSelf)
+            {
+                var image = levelSelections[i].GetComponent<Image>();
+
+                if (i+1 < GameManager.instance.currentLevel)
+                {
+                    var rand = Random.Range(0, facesSprites.Length);
+                    image.sprite = facesSprites[rand];
+                }
+                else if (i+1 == GameManager.instance.currentLevel)
+                {
+                    image.sprite = newGameSprite;
+                }
+                else
+                {
+                    image.sprite = noneActiveGameSprite;
+                }
+            }
+
+            #region backup code
+            //if (i < GameManager.currentLevel)
+            //{
+            //    var rand = Random.Range(0, facesSprites.Length);
+            //    image.sprite = facesSprites[rand];
+            //}
+            //else if (i == GameManager.currentLevel)
+            //{
+            //    image.sprite = newGameSprite;
+            //}
+            //else
+            //{
+            //    image.sprite = noneActiveGameSprite;
+            //}
+
+            //if (levelSelections[i].activeSelf)
+            //{
+            //    if (image.sprite.name == "Game_undone_new")
+            //    {
+            //        var rand = Random.Range(0, facesSprites.Length);
+            //        image.sprite = facesSprites[rand];
+            //    }
+            //    else
+            //    {
+            //        if (i == GameManager.currentLevel)
+            //        {
+            //            image.sprite = newGameSprite;
+            //        }
+            //        else
+            //        {
+            //            image.sprite = noneActiveGameSprite;
+            //        }
+            //    }
+            //}
+            #endregion
+        }
+
         if (isBegin)
         {
             if (shakespearBegin != null)
@@ -92,10 +183,12 @@ public class MenuManager : MonoBehaviour
         SoundManager.Instance.PlayMusic(bgMusicClip);
         SoundManager.Instance.LoopBGMusic();
 
-        scenesAnims[GameManager.currentLevel - 1].SetActive(true);
+        if (scenesAnims[GameManager.instance.currentLevel - 1] != null)
+            scenesAnims[GameManager.instance.currentLevel - 1].SetActive(true);
         if (!hasTextHappened)
         {
-            SoundManager.Instance.Play(scenesClips[GameManager.currentLevel - 1]);
+            if (scenesAnims[GameManager.instance.currentLevel - 1] != null)
+                SoundManager.Instance.Play(scenesClips[GameManager.instance.currentLevel - 1]);
             hasTextHappened = true;
         }
 
@@ -140,6 +233,7 @@ public class MenuManager : MonoBehaviour
             menuButton.SetBool("isSelected", true);
 
             aboutButton.SetActive(true);
+            fullPlayButton.SetActive(true);
         }
         else if(menuButton.GetBool("isSelected"))
         {
@@ -149,6 +243,7 @@ public class MenuManager : MonoBehaviour
             menuButton.SetBool("isSelected", false);
 
             aboutButton.SetActive(false);
+            fullPlayButton.SetActive(false);
         }
     }
 
@@ -191,6 +286,11 @@ public class MenuManager : MonoBehaviour
         SoundManager.Instance.PlayMusic(aboutClip);
 
         StartCoroutine(DelayForAboutClip(aboutClip));
+    }
+
+    public void OpenFullPlayURL()
+    {
+        Application.OpenURL("http://www.benjamintrigalou.com/midsummer_night_dream/");
     }
 
     private IEnumerator DelayForAboutClip(AudioClip aboutAnim)
@@ -265,4 +365,22 @@ public class MenuManager : MonoBehaviour
     {
         sceneController.levelToLoad = levelToLoad;
     }
+
+    /*public void UpdateFace(string buttonName)
+    {
+        switch (buttonName)
+        {
+            case "bad_score":
+                //face = selectedFacesSprites[0];
+                break;
+            case "good_score":
+                //face = selectedFacesSprites[1];
+                break;
+            case "ok_score":
+                //face = selectedFacesSprites[2];
+                break;
+            default:
+                break;
+        }
+    }*/
 }

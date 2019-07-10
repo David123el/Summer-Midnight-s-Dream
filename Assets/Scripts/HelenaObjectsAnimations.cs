@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿//using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +7,7 @@ using UnityEngine.UI;
 public class HelenaObjectsAnimations : MonoBehaviour
 {
     public List<GameObject> animations = new List<GameObject>();
+    //private GameObject[] animationsArray;
     public List<Image> objects = new List<Image>();
 
     [SerializeField]
@@ -24,9 +26,14 @@ public class HelenaObjectsAnimations : MonoBehaviour
     [SerializeField]
     private EventManager eventManager;
 
+    [SerializeField]
+    private GameObject[] reviews;
+    private GameObject animTest;
+
     private void Awake()
     {
-        Resources.UnloadUnusedAssets();
+        //Resources.UnloadUnusedAssets();
+        //GC.Collect();
     }
 
     private void Start()
@@ -35,7 +42,46 @@ public class HelenaObjectsAnimations : MonoBehaviour
 
         GameManager.instance.Guide(greyScreen, guideText);
         eventManager.OnLevelBegin(greyScreen, guideText);
+
+        //animationsArray = Resources.LoadAll<GameObject>("Prefabs/Resources/Level01");
+        //for (int i = 0; i < animationsArray.Length; i++)
+        //{
+        //    animTest = Instantiate(animationsArray[i]);
+        //    Debug.Log(animTest.name);
+        //}
     }
+
+    //private void OnDestroy()
+    //{
+    //    Resources.UnloadUnusedAssets();
+    //    for (int i = 0; i < animationsArray.Length; i++)
+    //    {
+    //        Destroy(animationsArray[i]);
+    //    }
+    //}
+
+    //public IEnumerator ActivateGO(string name)
+    //{
+    //    if (!HelenaObjectsController.isAnimOn)
+    //    {
+    //        if (animTest.GetComponent<HelenaObjectsEnum>().objectType.ToString() == name.ToLower())
+    //        {
+    //            staticBG.SetActive(false);
+    //            animTest.SetActive(true);
+
+    //            HelenaObjectsController.isAnimOn = true;
+
+    //            float delay = animTest.GetComponent<Animation>().clip.length;
+    //            yield return new WaitForSeconds(delay);
+    //        }
+
+    //        animTest.SetActive(false);
+    //        Destroy(animTest);
+    //        staticBG.SetActive(true);
+
+    //        HelenaObjectsController.isAnimOn = false;
+    //    }
+    //}
 
     public IEnumerator ActivateGO(string name)
     {
@@ -79,17 +125,24 @@ public class HelenaObjectsAnimations : MonoBehaviour
 
             swordGameObject.SetActive(false);
             Destroy(swordGameObject);
-            Instantiate(swordTalkGO);
-            swordTalkGO.SetActive(true);
+            var stGO = Instantiate(swordTalkGO);
+            stGO.SetActive(true);
 
-            delay = swordTalkGO.GetComponent<Animation>().clip.length;
+            delay = stGO.GetComponent<Animation>().clip.length;
             yield return new WaitForSeconds(delay);
 
-            swordTalkGO.SetActive(false);
+            Destroy(stGO);
             //Destroy(swordTalkGO);
             staticBG.SetActive(true);
 
             HelenaObjectsController.isAnimOn = false;
+
+            int rand = UnityEngine.Random.Range(0, reviews.Length);
+            reviews[rand].SetActive(true);
+
+            yield return new WaitForSeconds(5f);
+
+            EventManager.ExitLevel();
         }
     }
 }

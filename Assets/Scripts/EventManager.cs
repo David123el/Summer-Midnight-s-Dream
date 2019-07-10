@@ -10,6 +10,7 @@ public class EventManager : MonoBehaviour
     public static event Action OnSwitchBabyTeddy = delegate { };
     public static event Action OnBlockLand = delegate { };
     public static event Action<GameObject[]> OnPauseGame = delegate { };
+    public static event Action OnExitLevel = delegate { };
 
     public delegate IEnumerator LevelBeginEventHandler(GameObject a, GameObject b);
     public static event LevelBeginEventHandler LevelBegin;
@@ -49,5 +50,10 @@ public class EventManager : MonoBehaviour
     public static void PauseGame(GameObject[] objects)
     {
         OnPauseGame(objects);
+    }
+
+    public static void ExitLevel()
+    {
+        OnExitLevel();
     }
 }

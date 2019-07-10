@@ -42,6 +42,9 @@ public class PunchHermia : MonoBehaviour
     [SerializeField]
     private EventManager eventManager;
 
+    [SerializeField]
+    private GameObject[] reviews;
+
     void Start()
     {
         GameManager.instance.Guide(greyScreen, guideText);
@@ -120,5 +123,14 @@ public class PunchHermia : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         obj.SetActive(true);
+
+        yield return new WaitForSeconds(3f);
+
+        int rand = Random.Range(0, reviews.Length);
+        reviews[rand].SetActive(true);
+
+        yield return new WaitForSeconds(5f);
+        EventManager.LevelComplete();
+        EventManager.ExitLevel();
     }
 }

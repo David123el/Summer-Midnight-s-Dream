@@ -27,16 +27,26 @@ public class OberonTitania : MonoBehaviour
     [SerializeField]
     private EventManager eventManager;
 
+    [SerializeField]
+    private GameObject[] reviews;
+
+    [SerializeField]
+    private AudioClip[] audioClips;
+
     private void OnEnable()
     {
         EventManager.OnSwitchBabyTeddy += SwitchPositions;
         EventManager.OnSwitchBabyTeddy += DisableAnimators;
+        EventManager.OnSwitchBabyTeddy += ShowReview;
+        EventManager.OnSwitchBabyTeddy += PlayBabyCrySound;
     }
 
     private void OnDisable()
     {
         EventManager.OnSwitchBabyTeddy -= SwitchPositions;
         EventManager.OnSwitchBabyTeddy -= DisableAnimators;
+        EventManager.OnSwitchBabyTeddy -= ShowReview;
+        EventManager.OnSwitchBabyTeddy -= PlayBabyCrySound;
     }
 
     void Start()
@@ -46,6 +56,10 @@ public class OberonTitania : MonoBehaviour
 
         GameManager.instance.Guide(greyScreen, guideText);
         eventManager.OnLevelBegin(greyScreen, guideText);
+
+        EventManager.LevelStart();
+
+        SoundManager.Instance.PlayMusic(audioClips[1]);
     }
 
     void Update()
@@ -64,5 +78,16 @@ public class OberonTitania : MonoBehaviour
         AnimationManager.isGameOn = false;
 
         babyAnim.runtimeAnimatorController = babyAnimController;
+    }
+
+    public void PlayBabyCrySound()
+    {
+        SoundManager.Instance.Play(audioClips[2]);
+    }
+
+    public void ShowReview()
+    {
+        int rand = Random.Range(0, reviews.Length);
+        reviews[rand].SetActive(true);
     }
 }

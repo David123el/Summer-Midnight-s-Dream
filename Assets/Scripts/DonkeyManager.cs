@@ -25,7 +25,7 @@ public class DonkeyManager : MonoBehaviour
     [SerializeField]
     private CameraMovement cameraMove;
     [SerializeField]
-    private float camStep = 1f;
+    private float camStep = 30f;
     [SerializeField]
     private float blockStep = 1f;
 
@@ -53,6 +53,18 @@ public class DonkeyManager : MonoBehaviour
 
     [SerializeField]
     private EventManager eventManager;
+
+    [SerializeField]
+    private Image bar;
+    [SerializeField]
+    private Sprite[] barSprites;
+    private int barCounter = 0;
+
+    [SerializeField]
+    private GameObject[] reviews;
+
+    [SerializeField]
+    private GameObject lastPieceAnim;
 
     private void OnEnable()
     {
@@ -111,24 +123,30 @@ public class DonkeyManager : MonoBehaviour
         direction = Vector3.right;
 
         Time.timeScale = 1;
-        StartCoroutine(DecreaseTime());
+        //StartCoroutine(DecreaseTime());
     }
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (counter <= 13)
         {
-            isClicked = true;
-        }
+            if (Input.GetButtonDown("Fire1"))
+            {
+                isClicked = true;
+            }
 
-        //if (counter >= 16)
+            if (counter >= 13)
+            {
+                StartCoroutine(WinLevel());
+            }
+        }
             
 
-        if (timeLeft >= 0)
-            timeLeftText.text = ("" + timeLeft);
+        //if (timeLeft >= 0)
+        //    timeLeftText.text = ("" + timeLeft);
 
-        if (timeLeft <= 0)
-            EventManager.LevelFailed();
+        //if (timeLeft <= 0)
+        //    EventManager.LevelFailed();
     }
 
     private void FixedUpdate()
@@ -150,12 +168,19 @@ public class DonkeyManager : MonoBehaviour
             direction = direction * -1;
         }
 
-        if (isClicked && isPlayTime && counter < blockPool.Count)
+        if (counter < 13 && isClicked && isPlayTime && counter < blockPool.Count)
         {
             DetachFairies();
             DropBlock();
             PlayPinkLiquidAnimation();
+            UpdateBar();
         }
+    }
+
+    private void UpdateBar()
+    {
+        if (barCounter < barSprites.Length)
+            bar.sprite = barSprites[barCounter++];
     }
 
     private void DropBlock()
@@ -254,5 +279,37 @@ public class DonkeyManager : MonoBehaviour
     public void PauseGame()
     {
         GameManager.instance.PauseGame();
+    }
+
+    private IEnumerator WinLevel()
+    {
+        for (int i = 0; i < blockPool.Count; i++)
+        {
+            blockPool[i].GetComponent<Rigidbody2D>().gravityScale = 0;
+            blockPool[i].GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        }
+
+        block.SetActive(false);
+        var lastPieceGO = Instantiate(lastPieceAnim);
+        lastPieceGO.SetActive(true);
+
+        var blockCounter = 0;
+        for (int i = 0; i < blockPool.Count; i++)
+        {
+            if (blockPool[i].activeSelf)
+            {
+                blockCounter++;
+            }       
+        }
+        lastPieceGO.transform.position = new Vector3(lastPieceGO.transform.position.x, blockPool[blockCounter].transform.position.y - 3.2f, lastPieceGO.transform.position.z);
+
+        yield return new WaitForSeconds(6f);
+
+        int rand = Random.Range(0, reviews.Length);
+        reviews[rand].SetActive(true);
+
+        yield return new WaitForSeconds(5f);
+        EventManager.LevelComplete();
+        EventManager.ExitLevel();
     }
 }

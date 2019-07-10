@@ -66,6 +66,11 @@ public class game_manger_personal_temple_run : MonoBehaviour
     [SerializeField]
     private EventManager eventManager;
 
+    [SerializeField]
+    private Transform canvasParent;
+    [SerializeField]
+    private GameObject[] reviews;
+
     private void OnApplicationQuit()
     {
         for (int i = 0; i < ferb_in_game.Count; i++)
@@ -181,7 +186,7 @@ public class game_manger_personal_temple_run : MonoBehaviour
                     player_control.can_move = false;
                     Game_end = true;
 
-
+                    StartCoroutine(ShowReviews());
                 });
             }
          
@@ -368,5 +373,19 @@ public class game_manger_personal_temple_run : MonoBehaviour
 
         return result;
 
+    }
+
+    private IEnumerator ShowReviews()
+    {
+        int rand = UnityEngine.Random.Range(0, reviews.Length);
+        var reviewGO = Instantiate(reviews[rand]);
+        reviewGO.transform.SetParent(canvasParent);
+        reviewGO.transform.position = Vector3.zero;
+        reviewGO.transform.localScale = Vector3.one;
+        reviewGO.SetActive(true);
+
+        yield return new WaitForSeconds(5f);
+        EventManager.LevelComplete();
+        EventManager.ExitLevel();
     }
 }
