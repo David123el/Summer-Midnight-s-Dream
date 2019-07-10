@@ -10,6 +10,8 @@ public class HelenaObjectsAnimations : MonoBehaviour
     //private GameObject[] animationsArray;
     public List<Image> objects = new List<Image>();
 
+    public GameObject animationNode;
+
     [SerializeField]
     private GameObject staticBG;
 
@@ -83,21 +85,38 @@ public class HelenaObjectsAnimations : MonoBehaviour
     //    }
     //}
 
+    List<string> indexer = new List<string>(new string[]{
+        "bow",
+        "bell",
+        "fan",
+        "globe",
+        "goggles",
+        "vase",
+        "lantern",
+        "pendulum",
+        "parrot",
+        "sword"
+    });
     public IEnumerator ActivateGO(string name)
     {
         if (!HelenaObjectsController.isAnimOn)
         {
-            for (int i = 0; i < animations.Count; i++)
+            Debug.Log(name);
+            Debug.Log(animations.Count);
+            int i = indexer.IndexOf(name);
+            Debug.Log(i);
+            //for (int i = 0; i < animations.Count; i++)
             {
                 var anim = Instantiate(animations[i]);
-                if (anim.GetComponent<HelenaObjectsEnum>().objectType.ToString() == name.ToLower())
+                anim.transform.SetParent(animationNode.transform, false);
+                //if (anim.GetComponent<HelenaObjectsEnum>().objectType.ToString() == name.ToLower())
                 {
                     staticBG.SetActive(false);
                     anim.SetActive(true);
 
                     HelenaObjectsController.isAnimOn = true;
 
-                    float delay = anim.GetComponent<Animation>().clip.length;
+                    float delay = anim.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.length;
                     yield return new WaitForSeconds(delay);
                 }
 
@@ -116,19 +135,21 @@ public class HelenaObjectsAnimations : MonoBehaviour
         {
             staticBG.SetActive(false);
             var swordGameObject = Instantiate(swordGO);
+            swordGameObject.transform.SetParent(animationNode.transform, false);
             swordGameObject.SetActive(true);
 
             HelenaObjectsController.isAnimOn = true;
 
-            float delay = swordGameObject.GetComponent<Animation>().clip.length;
+            float delay = swordGameObject.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.length;
             yield return new WaitForSeconds(delay);
 
             swordGameObject.SetActive(false);
             Destroy(swordGameObject);
             var stGO = Instantiate(swordTalkGO);
+            stGO.transform.SetParent(animationNode.transform, false);
             stGO.SetActive(true);
 
-            delay = stGO.GetComponent<Animation>().clip.length;
+            delay = stGO.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.length;
             yield return new WaitForSeconds(delay);
 
             Destroy(stGO);

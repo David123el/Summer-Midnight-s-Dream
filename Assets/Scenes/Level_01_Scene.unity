@@ -2467,25 +2467,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animations:
-  - {fileID: 3300360024393372657, guid: 256de576d2586684eb7547b3d63517b4, type: 3}
-  - {fileID: 7356701686474516100, guid: cb3095acf311d3f458c82d171b6d6002, type: 3}
-  - {fileID: 3376989760605858740, guid: 9bafb41882aa63f4f93111f234570d75, type: 3}
-  - {fileID: 3503508505409011812, guid: 66acaabd8b101e94a8f658c64772c12a, type: 3}
-  - {fileID: 6520162990585744385, guid: 40e0e28af23b3694b8b9a505fe228c3d, type: 3}
-  - {fileID: 4185637644015114330, guid: 4ab4b95bcc18a2c43b4ba390e13dc11c, type: 3}
-  - {fileID: 4253480679602283312, guid: 9ec7fa3dc50cf7b47aed64c312299260, type: 3}
-  - {fileID: 8525779013034407803, guid: 08855747fc2569046b782fc687d75293, type: 3}
-  - {fileID: 7217461767272643110, guid: eea4106bd67dad043b95cced3a7da979, type: 3}
-  - {fileID: 1641776691726057584, guid: db2fdfa98589fe64380a8ec37e70871a, type: 3}
+  - {fileID: 860261004180653445, guid: 07f4a476307b1b14094ae7b53b9d25e9, type: 3}
+  - {fileID: 7215270374879980599, guid: 2afba57b6b5d77a45858e6cd53fbb32b, type: 3}
+  - {fileID: 2697296477888824157, guid: d88d516fc08add546a7acd18d6bc0019, type: 3}
+  - {fileID: 3367709169398923159, guid: 393865c19a1b0b045a90d6096db2a1a5, type: 3}
+  - {fileID: 3426147918316810878, guid: eab5c752754876748932eff20ca40094, type: 3}
+  - {fileID: 527747354063659192, guid: d73a25b76f364554f8dcd4870e1c7b82, type: 3}
+  - {fileID: 2903148560444301112, guid: f9401231237a7f74bb5775515a26fc54, type: 3}
+  - {fileID: 1695806782892198787, guid: 7af0b4b95ad81774d931ad7bcf394228, type: 3}
+  - {fileID: 1989796714092042169, guid: 5f089faf858dafd46b4404a785eeda72, type: 3}
+  - {fileID: 1146591470109100497, guid: e89a0328d6ffdc346bfaa07a1e0d4050, type: 3}
   objects:
   - {fileID: 1811224708}
   - {fileID: 71526805}
   - {fileID: 715456181}
   - {fileID: 8818878}
   - {fileID: 136711321}
+  animationNode: {fileID: 1902100018}
   staticBG: {fileID: 1451556899}
-  swordGO: {fileID: 8525779013034407803, guid: 08855747fc2569046b782fc687d75293, type: 3}
-  swordTalkGO: {fileID: 2395746142113868879, guid: e91b336269a5f2449b7b95b67874fd55,
+  swordGO: {fileID: 1146591470109100497, guid: e89a0328d6ffdc346bfaa07a1e0d4050, type: 3}
+  swordTalkGO: {fileID: 4766246861182384827, guid: 7732c5a944f66b44fa42df73148e0fd7,
     type: 3}
   greyScreen: {fileID: 1376963051}
   guideText: {fileID: 250669651}
@@ -3738,6 +3739,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1830213140}
   m_CullTransparentMesh: 0
+--- !u!1 &1902100018
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1902100019}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1902100019
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1902100018}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.97, y: -0.53, z: -0.037109375}
+  m_LocalScale: {x: 1.3973191, y: 1.3973191, z: 1.3973191}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1911733647
 GameObject:
   m_ObjectHideFlags: 0
