@@ -951,6 +951,7 @@ GameObject:
   - component: {fileID: 1244293669}
   - component: {fileID: 1244293670}
   - component: {fileID: 1244293671}
+  - component: {fileID: 1244293672}
   m_Layer: 0
   m_Name: Level Manager
   m_TagString: Untagged
@@ -1026,6 +1027,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7b14300d68264c94884602287f933eb0, type: 3}
   - {fileID: 8300000, guid: 7b2bda787695a7d4f882ef8c59c7bb62, type: 3}
   - {fileID: 8300000, guid: a650dbf6f5deee7489cbee1e49eed81f, type: 3}
+  sceneController: {fileID: 1244293669}
   UICanvas: {fileID: 226174963}
 --- !u!114 &1244293669
 MonoBehaviour:
@@ -1041,6 +1043,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 
   levelToLoad: 
+  pleaseHoldText: 
 --- !u!114 &1244293670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1065,6 +1068,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ffcf2ee3d89de43ad89c22ec9104a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1244293672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244293665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d141313dee431d498ce6bc69ad2cb93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: 
+  levelToLoad: 
+  pleaseHoldText: 
 --- !u!1 &1301270181
 GameObject:
   m_ObjectHideFlags: 0
@@ -2235,7 +2253,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 20
   m_Sprite: {fileID: 21300000, guid: bfdbeb622016f7443b67a102710e67d4, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8235294}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

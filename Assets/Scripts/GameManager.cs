@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     private bool isTimeStopped = false;
 
-    public static int currentLevel = 3;
+    public static int currentLevel;
 
     private void OnEnable()
     {
@@ -55,6 +55,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Application.targetFrameRate = 60;
+
+        currentLevel = 1;
     }
 
     public void PauseGame()

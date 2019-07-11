@@ -1924,6 +1924,17 @@ MonoBehaviour:
           m_StringArgument: Main_Stage_Scene
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1229409495}
+        m_MethodName: IncrementLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &895134952
@@ -2050,6 +2061,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Main_Stage_Scene
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1229409495}
+        m_MethodName: IncrementLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -2442,6 +2464,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 
   levelToLoad: 
+  pleaseHoldText: 
 --- !u!114 &1229409496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2486,17 +2509,28 @@ MonoBehaviour:
   - {fileID: 357910772}
   bgMusic: {fileID: 8300000, guid: 7cedb0bea89419049acc75358dde1ef3, type: 3}
   itemClips:
-  - {fileID: 8300000, guid: c4c2c2ad000a5064eb5b1a2f64df75ed, type: 3}
+  - {fileID: 8300000, guid: 614460dcc46567d46828521a01bd0c93, type: 3}
   - {fileID: 8300000, guid: 7a9b65e4a60790b43b0a15e1e225a96c, type: 3}
   - {fileID: 8300000, guid: 753d0bb5df6fd5d479d2f2cafac4d88c, type: 3}
+  - {fileID: 8300000, guid: a08b2194d891a97448df362b543ae6c3, type: 3}
   - {fileID: 8300000, guid: 5cdc3862b0b67af4faeedf8fc18a0273, type: 3}
   - {fileID: 8300000, guid: d7d42278d5163c949b1ae038dc87616a, type: 3}
+  - {fileID: 8300000, guid: fd43c746fae0ff6489f1acb798f293bd, type: 3}
   - {fileID: 8300000, guid: fec7ef82f1e0ffa44bcf1d454fdc78a3, type: 3}
-  - {fileID: 8300000, guid: 36a4f7171fadb274997814eae88b41a4, type: 3}
   - {fileID: 8300000, guid: da39408059ae998448d28d8a44051dfd, type: 3}
   - {fileID: 8300000, guid: 15aa8ef3bb1b6944f8c762ba463114c4, type: 3}
-  - {fileID: 8300000, guid: 614460dcc46567d46828521a01bd0c93, type: 3}
   swordTalkclip: {fileID: 8300000, guid: b843f14f6db3df9479d4c5e8504ba200, type: 3}
+  itemEnum:
+  - {fileID: 1964921666}
+  - {fileID: 1110189295}
+  - {fileID: 277567881}
+  - {fileID: 134991105}
+  - {fileID: 1684240057}
+  - {fileID: 1811224710}
+  - {fileID: 71526807}
+  - {fileID: 715456183}
+  - {fileID: 8818880}
+  - {fileID: 136711323}
 --- !u!4 &1229409498
 Transform:
   m_ObjectHideFlags: 0
@@ -2649,7 +2683,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 20
   m_Sprite: {fileID: 21300000, guid: bfdbeb622016f7443b67a102710e67d4, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.8235294}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2918,6 +2952,17 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Main_Stage_Scene
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1229409495}
+        m_MethodName: IncrementLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,

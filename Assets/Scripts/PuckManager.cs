@@ -50,6 +50,8 @@ public class PuckManager : MonoBehaviour
         SoundManager.Instance.LoopSFXMusic();
         SoundManager.Instance.PlayMusic(vivaldiSound);
         SoundManager.Instance.LoopBGMusic();
+
+        GameManager.currentLevel = 5;
     }
 
     void Update()

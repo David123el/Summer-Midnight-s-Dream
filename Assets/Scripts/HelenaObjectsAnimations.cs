@@ -38,6 +38,10 @@ public class HelenaObjectsAnimations : MonoBehaviour
     [SerializeField]
     private AudioClip swordTalkclip;
 
+    [SerializeField]
+    private HelenaObjectsEnum[] itemEnum;
+    //private ObjectsEnum itemType;
+
     private void Awake()
     {
         //Resources.UnloadUnusedAssets();
@@ -59,6 +63,8 @@ public class HelenaObjectsAnimations : MonoBehaviour
         //    animTest = Instantiate(animationsArray[i]);
         //    Debug.Log(animTest.name);
         //}
+
+        //itemType = itemEnum;
     }
 
     //private void OnDestroy()
@@ -136,6 +142,45 @@ public class HelenaObjectsAnimations : MonoBehaviour
                     staticBG.SetActive(false);
                     anim.SetActive(true);
 
+                    SoundManager.Instance.StopLoopSFXMusic();
+                    switch (itemEnum[i].objectType)
+                    {
+                        case ObjectsEnum.bow:
+                            SoundManager.Instance.Play(itemClips[0]);
+                            break;
+                        case ObjectsEnum.bell:
+                            SoundManager.Instance.Play(itemClips[1]);
+                            break;
+                        case ObjectsEnum.fan:
+                            SoundManager.Instance.Play(itemClips[2]);
+                            break;
+                        case ObjectsEnum.globe:
+                            //SoundManager.Instance.Play(itemClips[3]);
+                            break;
+                        case ObjectsEnum.goggles:
+                            SoundManager.Instance.Play(itemClips[4]);
+                            break;
+                        case ObjectsEnum.lantern:
+                            SoundManager.Instance.Play(itemClips[5]);
+                            break;
+                        case ObjectsEnum.parrot:
+                            SoundManager.Instance.Play(itemClips[6]);
+                            break;
+                        case ObjectsEnum.pendulum:
+                            SoundManager.Instance.Play(itemClips[7]);
+                            break;
+                        case ObjectsEnum.sword:
+                            SoundManager.Instance.Play(itemClips[8]);
+                            break;
+                        case ObjectsEnum.vase:
+                            SoundManager.Instance.Play(itemClips[9]);
+                            yield return new WaitForSeconds(itemClips[9].length);
+                            SoundManager.Instance.Play(itemClips[3]);
+                            break;
+                        default:
+                            break;
+                    }
+
                     HelenaObjectsController.isAnimOn = true;
 
                     float delay = anim.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.length;
@@ -187,7 +232,7 @@ public class HelenaObjectsAnimations : MonoBehaviour
             reviews[rand].SetActive(true);
 
             yield return new WaitForSeconds(5f);
-
+            
             EventManager.ExitLevel();
         }
     }

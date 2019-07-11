@@ -32,6 +32,9 @@ public class OberonTitania : MonoBehaviour
     [SerializeField]
     private AudioClip[] audioClips;
 
+    [SerializeField]
+    private SceneController sceneController;
+
     private void OnEnable()
     {
         EventManager.OnSwitchBabyTeddy += SwitchPositions;
@@ -100,11 +103,17 @@ public class OberonTitania : MonoBehaviour
         anim.SetActive(true);
         anim.transform.SetParent(UICanvas.transform, false);
         anim.transform.Find("Exit Button").GetComponent<Button>().onClick.AddListener(Exit);
+        //anim.transform.Find("Exit Button").GetComponent<Button>().onClick.AddListener(IncrementLevel);
         anim.transform.Find("play again Button").GetComponent<Button>().onClick.AddListener(Restart);
     }
 
     public void Exit() {
         GameManager.instance.ExitToMainMenu();
+    }
+
+    public void IncrementLevel()
+    {
+        sceneController.IncrementLevel();
     }
     
     public void Restart() {

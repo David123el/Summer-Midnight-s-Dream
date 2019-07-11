@@ -1,10 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
+    #region fields
     [SerializeField]
     private GameObject menuIn;
     [SerializeField]
@@ -23,9 +23,13 @@ public class MenuManager : MonoBehaviour
     private GameObject aboutAnim;
     private GameObject aboutAnimGO;
     [SerializeField]
+    private GameObject playGameButton;
+    [SerializeField]
     private GameObject aboutButton;
     [SerializeField]
     private GameObject fullPlayButton;
+    [SerializeField]
+    private GameObject gameSoundButton;
     [SerializeField]
     private AudioClip aboutClip;
     [SerializeField]
@@ -76,6 +80,7 @@ public class MenuManager : MonoBehaviour
     public string challengeTypeText;
     public string actNumberText;
     public string levelToLoad;
+    public int numberOfLevelToLoad;
 
     private SceneController sceneController;
 
@@ -92,39 +97,54 @@ public class MenuManager : MonoBehaviour
 
     public string buttonName;
 
-    [SerializeField]
+    //[SerializeField]
     private GameObject scene02Anim;
     private GameObject scene02GO;
 
+    [SerializeField]
+    private GameObject sceneTextGO;
+    [SerializeField]
+    private GameObject actTextGO;
+    [SerializeField]
+    private GameObject pleaseHoldTextGO;
+    [SerializeField]
+    private GameObject levelLockedTextGO;
+
+    [SerializeField]
+    private AudioClip clip;
+    #endregion
+
     private void OnApplicationQuit()
     {
-        Destroy(scene02GO);
+        Destroy(scene02Anim);
     }
 
     private void OnDestroy()
     {
-        Destroy(scene02GO);
+        Destroy(scene02Anim);
     }
 
-    IEnumerator Start()
+    private IEnumerator Start()
     {
         //int currentLevel = PlayerPrefs.GetInt("currentLevel");
 
         EventManager.LevelStart();
 
-        scene02GO = Instantiate(scene02Anim);
+        scene02GO = Resources.Load("Main Stage/scene_02") as GameObject;
+        scene02Anim = Instantiate(scene02GO);
+        scene02Anim.SetActive(true);
 
-        /*for (int i = 0; i < levelSelections.Length; i++)
+        for (int i = 0; i < levelSelections.Length; i++)
         {
             if (levelSelections[i].activeSelf)
             {
                 var image = levelSelections[i].GetComponent<Image>();
-                if (i+1 < currentLevel)
+                if (i + 1 < GameManager.currentLevel)
                 {
                     var rand = Random.Range(0, facesSprites.Length);
                     image.sprite = facesSprites[rand];
                 }
-                else if (i+1 == currentLevel)
+                else if (i + 1 == GameManager.currentLevel)
                 {
                     image.sprite = newGameSprite;
                 }
@@ -133,43 +153,7 @@ public class MenuManager : MonoBehaviour
                     image.sprite = noneActiveGameSprite;
                 }
             }
-
-            #region backup code
-            //if (i < GameManager.currentLevel)
-            //{
-            //    var rand = Random.Range(0, facesSprites.Length);
-            //    image.sprite = facesSprites[rand];
-            //}
-            //else if (i == GameManager.currentLevel)
-            //{
-            //    image.sprite = newGameSprite;
-            //}
-            //else
-            //{
-            //    image.sprite = noneActiveGameSprite;
-            //}
-
-            //if (levelSelections[i].activeSelf)
-            //{
-            //    if (image.sprite.name == "Game_undone_new")
-            //    {
-            //        var rand = Random.Range(0, facesSprites.Length);
-            //        image.sprite = facesSprites[rand];
-            //    }
-            //    else
-            //    {
-            //        if (i == GameManager.currentLevel)
-            //        {
-            //            image.sprite = newGameSprite;
-            //        }
-            //        else
-            //        {
-            //            image.sprite = noneActiveGameSprite;
-            //        }
-            //    }
-            //}
-            #endregion
-        }*/
+        }
 
         if (isBegin)
         {
@@ -184,12 +168,23 @@ public class MenuManager : MonoBehaviour
         SoundManager.Instance.PlayMusic(bgMusicClip);
         SoundManager.Instance.LoopBGMusic();
 
+        for (int i = 0; i < scenesAnims.Length; i++)
+        {
+            scenesAnims[i] = scene02Anim;
+        }
+
         if (scenesAnims[GameManager.currentLevel - 1] != null)
+        {
             scenesAnims[GameManager.currentLevel - 1].SetActive(true);
+        }
+
         if (!hasTextHappened)
         {
             if (scenesAnims[GameManager.currentLevel - 1] != null)
+            {
                 SoundManager.Instance.Play(scenesClips[GameManager.currentLevel - 1]);
+            }
+
             hasTextHappened = true;
         }
 
@@ -208,18 +203,37 @@ public class MenuManager : MonoBehaviour
         }
 
         sceneController = GetComponent<SceneController>();
-    }
 
-    void Update()
-    {
-        //if (isMenuOn)
-        //{
-        //    StartCoroutine(ToggleGameSoundToggle(true));
-        //}
-        //else
-        //{
-        //    StartCoroutine(ToggleGameSoundToggle(false));
-        //}
+        if (GameManager.currentLevel == 1)
+        {
+            actText.text = "act 1";
+            sceneController.levelToLoad = "Level_01_Scene";
+        }
+        else if (GameManager.currentLevel == 3)
+        {
+            actText.text = "act 3";
+            sceneController.levelToLoad = "Level_03_Scene";
+        }
+        else if (GameManager.currentLevel == 5)
+        {
+            actText.text = "act 5";
+            sceneController.levelToLoad = "Level_05_Scene";
+        }
+        else if (GameManager.currentLevel == 8)
+        {
+            actText.text = "act 8";
+            sceneController.levelToLoad = "Helena_Temple_Run";
+        }
+        else if (GameManager.currentLevel == 9)
+        {
+            actText.text = "act 9";
+            sceneController.levelToLoad = "Level_09_Scene";
+        }
+        else if (GameManager.currentLevel == 10)
+        {
+            actText.text = "act 10";
+            sceneController.levelToLoad = "Level_10_Scene";
+        }
     }
 
     public void ToggleMenu()
@@ -233,18 +247,22 @@ public class MenuManager : MonoBehaviour
             isMenuOn = true;
             menuButton.SetBool("isSelected", true);
 
+            playGameButton.SetActive(true);
             aboutButton.SetActive(true);
             fullPlayButton.SetActive(true);
+            gameSoundButton.SetActive(true);
         }
-        else if(menuButton.GetBool("isSelected"))
+        else if (menuButton.GetBool("isSelected"))
         {
             menuIn.SetActive(false);
             menuOut.SetActive(true);
             isMenuOn = false;
             menuButton.SetBool("isSelected", false);
 
+            playGameButton.SetActive(false);
             aboutButton.SetActive(false);
             fullPlayButton.SetActive(false);
+            gameSoundButton.SetActive(false);
         }
     }
 
@@ -336,6 +354,20 @@ public class MenuManager : MonoBehaviour
         isSoundMuted = false;
     }
 
+    public void ToggleSound()
+    {
+        if (!isSoundMuted)
+        {
+            SoundManager.Instance.Mute();
+            isSoundMuted = true;
+        }
+        else
+        {
+            SoundManager.Instance.UnMute();
+            isSoundMuted = false;
+        }
+    }
+
     public void PlayButtonSound()
     {
         SoundManager.Instance.StopLoopSFXMusic();
@@ -367,21 +399,25 @@ public class MenuManager : MonoBehaviour
         sceneController.levelToLoad = levelToLoad;
     }
 
-    /*public void UpdateFace(string buttonName)
+    public void UpdateButtonLevelNumber(int numberOfLevelToLoad)
     {
-        switch (buttonName)
-        {
-            case "bad_score":
-                //face = selectedFacesSprites[0];
-                break;
-            case "good_score":
-                //face = selectedFacesSprites[1];
-                break;
-            case "ok_score":
-                //face = selectedFacesSprites[2];
-                break;
-            default:
-                break;
-        }
-    }*/
+        sceneController.numberOfLevelToLoad = numberOfLevelToLoad;
+    }
+
+    public void UpdateButtonText()
+    {
+        sceneTextGO.SetActive(false);
+        actTextGO.SetActive(false);
+        pleaseHoldTextGO.SetActive(false);
+        levelLockedTextGO.SetActive(false);
+
+        if (!sceneController.isLevelLocked)
+            pleaseHoldTextGO.SetActive(true);
+        else levelLockedTextGO.SetActive(true);
+    }
+
+    public void PlayLevelSound(AudioClip clip)
+    {
+        SoundManager.Instance.Play(clip);
+    }
 }

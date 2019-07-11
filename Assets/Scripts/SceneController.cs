@@ -6,6 +6,9 @@ public class SceneController : MonoBehaviour
 {
     public new string name;
     public string levelToLoad;
+    public string pleaseHoldText;
+    public int numberOfLevelToLoad;
+    public bool isLevelLocked;
 
     public void RestartScene()
     {
@@ -55,10 +58,14 @@ public class SceneController : MonoBehaviour
 
     public void LoadLevel()
     {
-        if (levelToLoad != string.Empty)
-            LoadLevel(levelToLoad);
-        else if (levelToLoad == string.Empty)
-            LoadLevel("Level_01_Scene");
+        if (numberOfLevelToLoad <= GameManager.currentLevel)
+        {
+            isLevelLocked = false;
+
+            if (levelToLoad != string.Empty)
+                LoadLevel(levelToLoad);
+        }
+        else isLevelLocked = true;
     }
 
     public void LoadLevelAsync(string name)
@@ -85,6 +92,25 @@ public class SceneController : MonoBehaviour
         while (!asyncLoad.isDone)
         {
             yield return null;
+        }
+    }
+
+    public void IncrementLevel()
+    {
+        if (GameManager.currentLevel < 7)
+        {
+            if (GameManager.currentLevel == 1 && SceneManager.GetActiveScene().buildIndex == 1)
+                GameManager.currentLevel += 2;
+            else if (GameManager.currentLevel == 3 && SceneManager.GetActiveScene().buildIndex == 2)
+                GameManager.currentLevel += 2;
+            else if (GameManager.currentLevel == 5 && SceneManager.GetActiveScene().buildIndex == 3)
+                GameManager.currentLevel += 3;
+            else if (GameManager.currentLevel == 8 && SceneManager.GetActiveScene().buildIndex == 4)
+                GameManager.currentLevel ++;
+            else if (GameManager.currentLevel == 9 && SceneManager.GetActiveScene().buildIndex == 5)
+                GameManager.currentLevel++;
+            else if (GameManager.currentLevel == 10 && SceneManager.GetActiveScene().buildIndex == 6)
+                GameManager.currentLevel = 10;
         }
     }
 }
