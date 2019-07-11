@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/shahar/Scenes/Helena_Trees.unity
     guid: 38f73e10c652ca74fb3719d5789adc68
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level_03_Scene.unity
     guid: 86ce0ec7608bda846a0d8d8b8ddac7fa
   - enabled: 1

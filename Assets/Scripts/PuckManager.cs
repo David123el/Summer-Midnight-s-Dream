@@ -95,9 +95,10 @@ public class PuckManager : MonoBehaviour
         reviews[rand].SetActive(true);
 
         yield return new WaitForSeconds(5f);
+
+        //PlayerPrefs.SetInt("currentLevel", GameManager.currentLevel + 3);
+
         EventManager.LevelComplete();
         EventManager.ExitLevel();
-
-        GameManager.instance.currentLevel += 3;
     }
 }

@@ -65,6 +65,7 @@ public class AnimationManager : MonoBehaviour
                     {
                         SetAnimatorBool("isClicked", clickableAnimators);
                         SoundManager.Instance.Play(audioClips[0]);
+                        //PlayerPrefs.SetInt("currentLevel", GameManager.currentLevel + 2);
                         //EventManager.LevelComplete();
                     }
                 }

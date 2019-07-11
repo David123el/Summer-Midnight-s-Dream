@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     private bool isTimeStopped = false;
 
-    public int currentLevel = 5;
+    public static int currentLevel = 3;
 
     private void OnEnable()
     {
@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
         EventManager.LevelBegin += Guide;
         EventManager.OnPauseGame += PauseGame;
         EventManager.OnExitLevel += ExitToMainMenu;
-        EventManager.OnLevelComplete += NextLevel;
     }
 
     private void OnDisable()
@@ -25,7 +24,6 @@ public class GameManager : MonoBehaviour
         EventManager.LevelBegin -= Guide;
         EventManager.OnPauseGame -= PauseGame;
         EventManager.OnExitLevel -= ExitToMainMenu;
-        EventManager.OnLevelComplete -= NextLevel;
     }
 
     private void StopMusic()
@@ -48,6 +46,10 @@ public class GameManager : MonoBehaviour
 
         Resources.UnloadUnusedAssets();
         //GC.Collect();
+
+        //PlayerPrefs.SetInt("currentLevel", currentLevel);
+        /*if (PlayerPrefs.GetInt("currentLevel") != 0)
+            currentLevel = PlayerPrefs.GetInt("currentLevel");*/
     }
 
     private void Start()
@@ -128,10 +130,5 @@ public class GameManager : MonoBehaviour
     public void ExitToMainMenu()
     {
         SceneManager.LoadScene("Main_Stage_Scene");
-    }
-
-    public void NextLevel()
-    {
-        currentLevel++;
     }
 }

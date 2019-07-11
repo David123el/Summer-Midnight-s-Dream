@@ -108,22 +108,23 @@ public class MenuManager : MonoBehaviour
 
     IEnumerator Start()
     {
+        int currentLevel = PlayerPrefs.GetInt("currentLevel");
+
         EventManager.LevelStart();
 
         scene02GO = Instantiate(scene02Anim);
 
-        for (int i = 0; i < levelSelections.Length; i++)
+        /*for (int i = 0; i < levelSelections.Length; i++)
         {
             if (levelSelections[i].activeSelf)
             {
                 var image = levelSelections[i].GetComponent<Image>();
-
-                if (i+1 < GameManager.instance.currentLevel)
+                if (i+1 < currentLevel)
                 {
                     var rand = Random.Range(0, facesSprites.Length);
                     image.sprite = facesSprites[rand];
                 }
-                else if (i+1 == GameManager.instance.currentLevel)
+                else if (i+1 == currentLevel)
                 {
                     image.sprite = newGameSprite;
                 }
@@ -168,7 +169,7 @@ public class MenuManager : MonoBehaviour
             //    }
             //}
             #endregion
-        }
+        }*/
 
         if (isBegin)
         {
@@ -183,12 +184,12 @@ public class MenuManager : MonoBehaviour
         SoundManager.Instance.PlayMusic(bgMusicClip);
         SoundManager.Instance.LoopBGMusic();
 
-        if (scenesAnims[GameManager.instance.currentLevel - 1] != null)
-            scenesAnims[GameManager.instance.currentLevel - 1].SetActive(true);
+        if (scenesAnims[currentLevel - 1] != null)
+            scenesAnims[currentLevel - 1].SetActive(true);
         if (!hasTextHappened)
         {
-            if (scenesAnims[GameManager.instance.currentLevel - 1] != null)
-                SoundManager.Instance.Play(scenesClips[GameManager.instance.currentLevel - 1]);
+            if (scenesAnims[GameManager.currentLevel - 1] != null)
+                SoundManager.Instance.Play(scenesClips[currentLevel - 1]);
             hasTextHappened = true;
         }
 
