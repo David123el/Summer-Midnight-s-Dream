@@ -156,7 +156,8 @@ public class HelenaObjectsAnimations : MonoBehaviour
         if (!HelenaObjectsController.isAnimOn)
         {
             staticBG.SetActive(false);
-            var swordGameObject = Instantiate(swordGO);
+            var prefab = Resources.Load("Level01/EXPORT SIZE_sward_00023");
+            var swordGameObject = (GameObject)Instantiate(prefab);
             swordGameObject.transform.SetParent(animationNode.transform, false);
             swordGameObject.SetActive(true);
 
@@ -167,7 +168,8 @@ public class HelenaObjectsAnimations : MonoBehaviour
 
             swordGameObject.SetActive(false);
             Destroy(swordGameObject);
-            var stGO = Instantiate(swordTalkGO);
+            var prefab2 = Resources.Load("Level01/EXPORT SIZE_sward win_00057");
+            var stGO = (GameObject)Instantiate(prefab2);
             stGO.transform.SetParent(animationNode.transform, false);
             stGO.SetActive(true);
             SoundManager.Instance.Play(swordTalkclip);

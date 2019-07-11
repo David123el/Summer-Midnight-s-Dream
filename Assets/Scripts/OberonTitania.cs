@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class OberonTitania : MonoBehaviour
 {
@@ -26,9 +28,6 @@ public class OberonTitania : MonoBehaviour
 
     [SerializeField]
     private EventManager eventManager;
-
-    [SerializeField]
-    private GameObject[] reviews;
 
     [SerializeField]
     private AudioClip[] audioClips;
@@ -85,9 +84,30 @@ public class OberonTitania : MonoBehaviour
         SoundManager.Instance.Play(audioClips[2]);
     }
 
+    List<string> reviewPaths = new List<string>(){
+        "review_good",
+        "review_bad",
+        "review_ok",
+    };
+
+    public GameObject UICanvas;
+
     public void ShowReview()
     {
-        int rand = Random.Range(0, reviews.Length);
-        reviews[rand].SetActive(true);
+        int rand = Random.Range(0, reviewPaths.Count);
+        var prefab = Resources.Load("Level03/" + reviewPaths[rand]);
+        var anim = (GameObject)Instantiate(prefab);
+        anim.SetActive(true);
+        anim.transform.SetParent(UICanvas.transform, false);
+        anim.transform.Find("Exit Button").GetComponent<Button>().onClick.AddListener(Exit);
+        anim.transform.Find("play again Button").GetComponent<Button>().onClick.AddListener(Restart);
+    }
+
+    public void Exit() {
+        GameManager.instance.ExitToMainMenu();
+    }
+    
+    public void Restart() {
+        SceneManager.LoadScene("Level_03_Scene");
     }
 }

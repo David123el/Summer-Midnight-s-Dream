@@ -2466,17 +2466,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb05899102dc5df4182e358b45669621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animations:
-  - {fileID: 860261004180653445, guid: 07f4a476307b1b14094ae7b53b9d25e9, type: 3}
-  - {fileID: 7215270374879980599, guid: 2afba57b6b5d77a45858e6cd53fbb32b, type: 3}
-  - {fileID: 2697296477888824157, guid: d88d516fc08add546a7acd18d6bc0019, type: 3}
-  - {fileID: 3367709169398923159, guid: 393865c19a1b0b045a90d6096db2a1a5, type: 3}
-  - {fileID: 3426147918316810878, guid: eab5c752754876748932eff20ca40094, type: 3}
-  - {fileID: 527747354063659192, guid: d73a25b76f364554f8dcd4870e1c7b82, type: 3}
-  - {fileID: 2903148560444301112, guid: f9401231237a7f74bb5775515a26fc54, type: 3}
-  - {fileID: 1695806782892198787, guid: 7af0b4b95ad81774d931ad7bcf394228, type: 3}
-  - {fileID: 1989796714092042169, guid: 5f089faf858dafd46b4404a785eeda72, type: 3}
-  - {fileID: 1146591470109100497, guid: e89a0328d6ffdc346bfaa07a1e0d4050, type: 3}
   objects:
   - {fileID: 1811224708}
   - {fileID: 71526805}
