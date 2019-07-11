@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class HelenaObjectsAnimations : MonoBehaviour
 {
-    public List<GameObject> animations = new List<GameObject>();
     //private GameObject[] animationsArray;
     public List<Image> objects = new List<Image>();
 
@@ -94,7 +93,7 @@ public class HelenaObjectsAnimations : MonoBehaviour
     //    }
     //}
 
-    List<string> indexer = new List<string>(new string[]{
+    List<string> indexer = new List<string>(){
         "bow",
         "bell",
         "fan",
@@ -105,7 +104,19 @@ public class HelenaObjectsAnimations : MonoBehaviour
         "pendulum",
         "parrot",
         "sword"
-    });
+    };
+    List<string> names = new List<string>(){
+        "EXPORT SIZE_bow_00007",
+        "EXPORT SIZE_bell_00037",
+        "EXPORT SIZE_fan_00060",
+        "EXPORT SIZE_globe_00074",
+        "EXPORT SIZE_goggles_00033",
+        "EXPORT SIZE_vase_00014",
+        "EXPORT SIZE_lentern_00045",
+        "EXPORT SIZE_pendulum_00099",
+        "EXPORT SIZE_parrot_00032",
+        "EXPORT SIZE_sward_00023",
+    };
     public IEnumerator ActivateGO(string name)
     {
         if (!HelenaObjectsController.isAnimOn)
@@ -116,7 +127,9 @@ public class HelenaObjectsAnimations : MonoBehaviour
             //Debug.Log(i);
             //for (int i = 0; i < animations.Count; i++)
             {
-                var anim = Instantiate(animations[i]);
+                var prefab = Resources.Load("Level01/" + names[i]);
+                var anim = (GameObject)Instantiate(prefab);
+                //var anim = Instantiate(animations[i]);
                 anim.transform.SetParent(animationNode.transform, false);
                 //if (anim.GetComponent<HelenaObjectsEnum>().objectType.ToString() == name.ToLower())
                 {
