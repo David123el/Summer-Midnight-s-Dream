@@ -32,6 +32,13 @@ public class HelenaObjectsAnimations : MonoBehaviour
     private GameObject[] reviews;
     private GameObject animTest;
 
+    [SerializeField]
+    private AudioClip bgMusic;
+    [SerializeField]
+    private AudioClip[] itemClips;
+    [SerializeField]
+    private AudioClip swordTalkclip;
+
     private void Awake()
     {
         //Resources.UnloadUnusedAssets();
@@ -44,6 +51,8 @@ public class HelenaObjectsAnimations : MonoBehaviour
 
         GameManager.instance.Guide(greyScreen, guideText);
         eventManager.OnLevelBegin(greyScreen, guideText);
+
+        SoundManager.Instance.PlayMusic(bgMusic);
 
         //animationsArray = Resources.LoadAll<GameObject>("Prefabs/Resources/Level01");
         //for (int i = 0; i < animationsArray.Length; i++)
@@ -101,10 +110,10 @@ public class HelenaObjectsAnimations : MonoBehaviour
     {
         if (!HelenaObjectsController.isAnimOn)
         {
-            Debug.Log(name);
-            Debug.Log(animations.Count);
+            //Debug.Log(name);
+            //Debug.Log(animations.Count);
             int i = indexer.IndexOf(name);
-            Debug.Log(i);
+            //Debug.Log(i);
             //for (int i = 0; i < animations.Count; i++)
             {
                 var anim = Instantiate(animations[i]);
@@ -148,6 +157,7 @@ public class HelenaObjectsAnimations : MonoBehaviour
             var stGO = Instantiate(swordTalkGO);
             stGO.transform.SetParent(animationNode.transform, false);
             stGO.SetActive(true);
+            SoundManager.Instance.Play(swordTalkclip);
 
             delay = stGO.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.length;
             yield return new WaitForSeconds(delay);

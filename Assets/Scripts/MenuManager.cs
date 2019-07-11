@@ -108,7 +108,7 @@ public class MenuManager : MonoBehaviour
 
     IEnumerator Start()
     {
-        int currentLevel = PlayerPrefs.GetInt("currentLevel");
+        //int currentLevel = PlayerPrefs.GetInt("currentLevel");
 
         EventManager.LevelStart();
 
@@ -184,12 +184,12 @@ public class MenuManager : MonoBehaviour
         SoundManager.Instance.PlayMusic(bgMusicClip);
         SoundManager.Instance.LoopBGMusic();
 
-        if (scenesAnims[currentLevel - 1] != null)
-            scenesAnims[currentLevel - 1].SetActive(true);
+        if (scenesAnims[GameManager.currentLevel - 1] != null)
+            scenesAnims[GameManager.currentLevel - 1].SetActive(true);
         if (!hasTextHappened)
         {
             if (scenesAnims[GameManager.currentLevel - 1] != null)
-                SoundManager.Instance.Play(scenesClips[currentLevel - 1]);
+                SoundManager.Instance.Play(scenesClips[GameManager.currentLevel - 1]);
             hasTextHappened = true;
         }
 

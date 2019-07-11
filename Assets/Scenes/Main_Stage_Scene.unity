@@ -170,7 +170,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: b82937670d1e8d0499af346501583c97, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 52c29c7366230ae44a723f9cbccf0535, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -648,6 +648,7 @@ GameObject:
   - component: {fileID: 162803093}
   - component: {fileID: 162803092}
   - component: {fileID: 162803091}
+  - component: {fileID: 162803090}
   m_Layer: 5
   m_Name: BG Canvas
   m_TagString: Untagged
@@ -655,6 +656,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &162803090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 162803089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5677d6d24bb627e4a96495270b1c7450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &162803091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1617,7 +1630,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 458bd42c53762044496e42f0daadc2ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLevel: 5
 --- !u!4 &570402879
 Transform:
   m_ObjectHideFlags: 0
@@ -1995,7 +2007,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1512505784}
-        m_MethodName: LoadLevelAsync
+        m_MethodName: LoadLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2159,7 +2171,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 295.30453, y: -13.5}
+  m_AnchoredPosition: {x: 331.46426, y: -13.5}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &754343657
@@ -4346,7 +4358,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 126.55908, y: -13.5}
+  m_AnchoredPosition: {x: 174.01874, y: -13.5}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1607823507
